@@ -1,0 +1,50 @@
+body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+    color: #00a1d5;
+    background-color: #f0f0f0;
+}
+
+.navbar-inverse {
+    color: #FFFFFF !important;
+    background-color: #0f4155 !important;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+	color: #FFFFFF;
+}
+
+.navbar-inverse  img {
+	float: right;
+}
+
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+	color: #324146;
+	background-color: #f0f0f0;
+}
+
+.navbar-fixed-top {
+	top: 0;
+	border-width: 0 0 0px;
+}
+
+#form-signin {
+	background-color: #465a63;
+	padding: 10px;
+}
+
+
+
+#form-signin h2 {
+	color: #FFF;
+}
+
+#sidebar .jumbotron {
+	padding:	10px;
+	color: #FFF;
+	background-color: #465a63;
+}
+
+#newsListView {
+	list-style-type: none;
+}
