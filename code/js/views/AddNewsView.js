@@ -16,11 +16,9 @@ var AddNewsView = Backbone.View.extend({
       'change #newsContent' : 'newsContentChangeHandler'     
     },
 
-    initialize: function() {
-      this.model = new NewsModel();
-    },
 
     render: function() {
+      this.model = new NewsModel();
       var $el = $(this.el);
       var html = this.template();
       $el.html(html);
@@ -29,9 +27,7 @@ var AddNewsView = Backbone.View.extend({
 
     submitFormHandler: function(e) {
       e.preventDefault();
-      console.log("adding news to collection");
-      this.collection.add(this.model);
-      this.model = new NewsModel();
+      this.collection.add(this.model);      
       this.render();
     },
 
