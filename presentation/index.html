@@ -59,6 +59,12 @@
 				<section>
 					<section>
 						<h2>Intro til Backbone.js</h2>
+						<ul>
+							<li>Created by Jeremy Ashkenas </li>
+							<li>Initially released in October 2010</li>
+							<li>Current stable version 1.1.2</li>
+							<li>Dependencies to jQuery and Underscore</li>
+						</ul>
 					</section>
 					<section>
 						<img src="img/websites.png">
@@ -72,6 +78,16 @@
 					<section>
 						<h2>Backbone vs</h2>
 					</section>
+					<section>
+						<h2>The Good Parts</h2>
+						<ul>
+							<li>Size</li>
+							<li>Learning curve</li>
+							<li>Flexible</li>
+							<li>Community</li>
+							<li>Ecosystem</li>
+						</ul>
+					</section>
 				</section>
 
 				<section>
@@ -83,12 +99,36 @@
 					    <script type="text/template">
 							```javascript
 							  var BookModel = Backbone.Model.extend({
+							  
+							  });
+							```
+					    </script>
+					</section>
+					
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							  var BookModel = Backbone.Model.extend({
+
+							  	initialize: function() {
+							  		console.log("called when initializing");
+							  	} 
+
+							  });
+							```
+					    </script>
+					</section>
+
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							  var BookModel = Backbone.Model.extend({
 
 							  	url: "http://www.backbone.org/model/"
 
 							  	initialize: function() {
 							  		console.log("called when initializing");
-							  	},
+							  	}, 
 
 							  	defaults: {
 							  		"rating": 4.5
@@ -106,10 +146,65 @@
 							  var Book1 = new BookModel();
 
 							  var Book2 = new BookModel({
-							  	"rating" : "6.0",
+							  	"rating" : 6.0,
 							  	"author" : "Knausgård",
-							  	"title"  : "Mein Kamf"
+							  	"title"  : "Mein Kampf"
 							  });
+							```
+					    </script>
+					</section>
+
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							  //  Get / Set attributes
+  							  book2.get("rating") // 6.0
+							  book2.get("author") // "Knausgård"
+							  book2.get("title") // "Mein Kampf"
+
+							  book1.set("rating", 8.5);
+							  book1.set("author", "Roald Dahl");
+							  book1.set("title", "Gummitarzan");
+
+
+							```
+					    </script>
+					</section>
+
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							  // HTTP PUT
+							  book1.save();
+
+							  // HTTP DELETE
+							  book2.destroy();
+
+							  // HTTP GET
+							  var book3 = new BookModel();
+							  book3.url = "http//www.cap.com/api/books/3";
+							  book3.fetch();
+
+
+							```
+					    </script>
+					</section>
+
+					<section data-markdown>
+						<h2>Example</h2>	
+					 					
+					 </section>
+
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							  // Utility functions
+							  
+							  // Returns true if attributes were changed after initialization
+							  book1.hasChanged();
+
+
+
 							```
 					    </script>
 					</section>

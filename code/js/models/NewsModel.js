@@ -3,7 +3,7 @@ define([
   'backbone'
 ], function(_, Backbone){
   var NewsModel = Backbone.Model.extend({
-  	url: http://localhost/model
+  	url: "http://localhost/model",
 
   	defaults: {
 
@@ -11,7 +11,7 @@ define([
 
   	initialize: function() {
 
-  	},
+  	}
 
   });
   // Return the model for the module
