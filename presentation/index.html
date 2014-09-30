@@ -73,6 +73,12 @@
 						<h2>MV*</h2>
 					</section>
 					<section>
+						<img src="img/MVC.png">
+					</section>
+					<section>
+						<img src="img/MV.png">
+					</section>
+					<section>
 						<h2>Oppbygning</h2>
 					</section>
 					<section>
@@ -211,9 +217,72 @@
 				</section>
 
 				<section>
-					<h2>View</h2>
-				</section>
+					<section>
+						<h2>View</h2>
+					</section>
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							var BookView = Backbone.View.extend({
 
+							});
+							```
+					    </script>
+					</section>
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							var BookView = Backbone.View.extend({
+								initialize: function() {
+									console.log('View model: ' + this.model);						  		
+								},
+
+								render: function() {
+									this.$el.html('<p>My View</p>');
+								}							
+							});
+							```
+					    </script>
+					</section>
+
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							var BookView = Backbone.View.extend({
+								events: {
+									"click": "updateModel"
+								},
+
+								initialize: function() {
+									console.log('View model: ' + this.model);							  	
+								},
+
+								render: function() {
+									this.$el.html('<p>My View</p>');
+								},
+
+								updateModel: function(event) {
+									this.model.update(event.currentTarget.value);							  	
+								}
+							});
+							```
+					    </script>
+					</section>
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							  var book1 = new BookModel();
+
+							  var bookDiv = new BookView({
+							  	el : $('div.bookView'),
+							  	model : book1
+							  });
+
+							  bookDiv.render();
+							```
+					    </script>
+					</section>
+				</section>
 				<section>
 					<h2>Collection</h2>
 				</section>
