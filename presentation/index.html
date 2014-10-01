@@ -234,7 +234,7 @@
 							```javascript
 							var BookView = Backbone.View.extend({
 								initialize: function() {
-									console.log('View model: ' + this.model);						  		
+									console.log('View model: ' + this.model);
 								},
 
 								render: function() {
@@ -262,7 +262,7 @@
 								},
 
 								updateModel: function(event) {
-									this.model.update(event.currentTarget.value);							  	
+									this.model.set('title', event.currentTarget.value);							  	
 								}
 							});
 							```
