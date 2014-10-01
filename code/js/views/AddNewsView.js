@@ -2,12 +2,11 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!../templates/AddNews.html',
   'models/NewsModel',
 
-], function($, _, Backbone, template, NewsModel){
+], function($, _, Backbone, NewsModel){
 var AddNewsView = Backbone.View.extend({
-    template: _.template(template),
+    template: _.template($('#AddNewsTemplate').html()),
 
     events: {
       'submit form' : 'submitFormHandler',

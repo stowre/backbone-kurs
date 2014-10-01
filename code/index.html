@@ -8,7 +8,8 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/cap.css" rel="stylesheet">
     <link rel="shortcut icon" href="http://www.no.capgemini.com/sites/all/themes/capgemini/favicon.ico" type="image/vnd.microsoft.icon">
-    <script data-main="js/main" src="lib/require.js"></script>
+    <script data-main="js/main" src="templates/templates.js"></script>
+    <script src="lib/require.js"></script>
 </head>
 
 <body>
@@ -52,5 +53,36 @@
       <hr>
 
     </div>
+
+    <script type="text/template" id="AddNewsTemplate">
+      <div class="jumbotron">
+      <h2>Legg til nyhet </h2>
+      <form role="form">
+          <div class="form-group">
+            <label for="author">Forfatter</label>
+            <input type="text" id="author" class="form-control" placeholder="Ditt navn">
+          </div>
+          <div class="form-group">
+            <label for="headline">Overskrift</label>
+            <input type="text" id="headline" class="form-control" placeholder="Awsm overskrift">
+          </div>
+          <div class="form-group">
+            <label for="newsContent">Innhold</label>
+            <textarea id="newsContent"class="form-control" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+    </script>
+
+    <script type="text/template" id="NewsItemTemplate">
+      <div class="col-6 col-sm-6 col-lg-4">
+        <h2><%- heading %></h2>
+        <div>av <%- author %></div>
+        <p> <%- content %></p>
+      </div>
+    </script>
+
+    <sci
 </body>
 </html>
