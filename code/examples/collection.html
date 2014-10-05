@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Model</title>
+    <script src="../lib/jquery-2.1.1.js"></script>
+    <script src="../lib/underscore.js"></script>
+    <script src="../lib/backbone.js"></script>
+    <script src="bookModel.js"></script>
+</head>
+
+<body>
+
+
+<script>
+  var BooksCollection = Backbone.Collection.extend({
+      model: BookModel,
+      url: '/api/books',
+      
+      comparator : function(model1, model2) {
+        var model1Published = model1.get("published");
+        var model2Published = model2.get("published");
+
+        if(model1Published > model2Published) {
+            return 1;
+        } else if(model1Published === model2Published) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }
+  });
+</script>
+</body>
+</html>

@@ -60,7 +60,7 @@
 					<section>
 						<h2>Intro til Backbone.js</h2>
 						<ul>
-							<li>Created by Jeremy Ashkenas </li>
+							<li>Created by Jeremy Ashkenas (CoffeeScript / Underscore.js </li>
 							<li>Initially released in October 2010</li>
 							<li>Current stable version 1.1.2</li>
 							<li>Dependencies to jQuery and Underscore</li>
@@ -72,9 +72,10 @@
 					<section>
 						<h2>Why</h2>
 						<ul>
-							<li>Structure </li>
+							<li>Struktur </li>
 							<li>Single Responsiblity Principe</li>
-							Arne
+                            <li>Vedlikeholdbar</li>
+                            <li>Gjenbrukbar</li>
 						</ul>
 					</section>
 					<section>
@@ -96,7 +97,7 @@
 					</section>
 					<section>
 						<h2>Backbone vs</h2>
-						Arne
+						<img src="img/size.png">
 					</section>
 
 				</section>
@@ -154,9 +155,9 @@
 					<section data-markdown>
 					    <script type="text/template">
 							```javascript
-							  var Book1 = new BookModel();
+							  var book1 = new BookModel();
 
-							  var Book2 = new BookModel({
+							  var book2 = new BookModel({
 							  	"rating" : 6.0,
 							  	"author" : "Knausgård",
 							  	"title"  : "Mein Kampf"
@@ -292,8 +293,9 @@
 				<section>
 					
 					<section>
+                        Kittel
 					<h2>Templating</h2>
-					Kittel
+					<img src="img/templating.png">
 					</section>
 				</section>
 				<section>
@@ -309,8 +311,134 @@
 					</section>
 				</section>
 				<section>
-					<h2>Collection</h2>
-					Arne
+                    <section>
+                        <h2>Collection</h2>
+                        <ul>
+                            <li>Ordered set of models</li>
+                            <li>Views can bind to events ("change", "add", "remove") </li>
+                            <li>Underscore methods (_.each, _.map, _.reduce)</li>
+                        </ul>
+                    </section>					
+                    <section data-markdown>
+					    <script type="text/template">
+							```javascript
+var BooksCollection = Backbone.Collection.extend({
+    // Defining model is required
+    model: BookModel							
+});
+							```
+					    </script>
+					</section>
+                    <section data-markdown>
+					    <script type="text/template">
+                            ```javascript
+                            // Create model
+                            var book1 = new BookModel();
+                            book1.set(id, 1337);
+                            book1.set("author", "Jo Nesbø");
+                            
+                            // Create collection
+                            var books = new BookCollection();
+                            
+                            // Add model to collection
+                            // Triggers "add" event
+                            books.add(book1);
+                        
+                            
+                            // Get model from collection by models idAttribute
+                            var model = books.get(1337);
+                            
+                            // Raw Javascript array of all models
+                            books.models
+                            
+
+
+							```
+					    </script>
+					</section>
+                    <section data-markdown>
+					    <script type="text/template">
+                            ```javascript
+                            var books2 = new BookCollection();
+                            
+                            // HTTP GET to url
+                            // Triggers "reset" event on success
+                            books2.fetch();
+                            
+                            // HTTP GET with options
+                            books2.fetch({
+                                success: function(){ console.log("sucess!"); },
+                                error: function(coll, res){ console.log(res.status); }
+                            })
+                            
+                            // Add model to collection + persistence
+                            // Triggers "add" event
+                            // HTTP PUT to books.url/book1.id (/books/1337)
+                            books.create(book1);
+                            
+                            
+							```
+					    </script>
+					</section>
+                    <section data-markdown>
+					    <script type="text/template">
+                            ```javascript
+                                                        
+                            // Pluck an attribute from each model in the collection.
+                            books2.pluck("author"); // -> ["Dustin Thomason", "Dan Brown"]
+                            
+                            // Return an array of all the models in a 
+                            // collection that match the passed attributes
+                            var publishedIn2003 = books2.where({published: 2003});
+                            
+                            // Forces resort
+                            // Triggers "sort" event
+                            books2.sort();
+                            
+                            books2.length;
+                            
+                            
+							```
+					    </script>
+					</section>
+                    
+                    <section data-markdown>
+					    <script type="text/template">
+                            ```javascript
+                            // Set comparator attribute for sort
+                            var BooksCollection = Backbone.Collection.extend({
+                                model: BookModel,
+                                // Define attribute to sort by
+                                comparator: 'published'
+                                
+                            });
+                            
+                            var BooksCollection = Backbone.Collection.extend({
+                                model: BookModel,
+                                comparator : function(model1, model2) {
+                                    var model1Published = model1.get("published");
+                                    var model2Published = model2.get("published");
+                                    
+                                    // Return -1 if model1 should come before model2
+                                    if(model1Published < model2Published) {
+                                        return -1;
+                                    } else if(model1Published === model2Published) {
+                                        return 0;
+                                    } else {
+                                        return 1;
+                                    }
+                                }
+                                
+                            });
+                            
+							```
+					    </script>
+					</section>
+                    <section data-markdown>
+					    <script type="text/template">
+                            <h2>Examples </h2>
+					    </script>
+					</section>
 				</section>
 				<section>
 					<h2>ListView</h2>
@@ -323,7 +451,7 @@
 							<li>Lag Collection <i>NewsCollection</i></li>
 							<li>Lag kode for å oppdatere NewsCollection når bruker trykker Submit</li>
 							<li>Lag view <i>NewsView med template NewsItemTemplate</i></li>
-							<li>Lag view <i>NewsListView</i> som itererer over <i>NewsCollection</i> og lager <i>NewsView</i></li>
+							<li>Lag view <i>NewsListView</i> som itererer over <i>NewsCollection</i> og lager <i>NewsView</i>'s</li>
 							
 
 						</ol>
@@ -359,20 +487,22 @@
 							<li>Ecosystem</li>
 						</ul>
 					</section>
-					<section>
-					Arne	
+					<section>	
 						<h2>Not so good Parts</h2>
 						<ul>
+                            <li>Lacks two-way binding</li>
+							<li>Competition from angular.js</li>
 						</ul>
 					</section>
 					<section>
 						KITTEL
 						<h2>References</h2>
 					</section>
-					<section>
+
+				</section>
+                <section>
 						<h1>TAKK FOR OSS</h1>
 					</section>
-				</section>
 				<section>
 					<section>
 						<h2>Bonusoppgaver</h2>
