@@ -297,6 +297,32 @@
 					<h2>Templating</h2>
 					<img src="img/templating.png">
 					</section>
+                    			<section data-markdown>
+					    <script type="text/template">
+						```javascript
+						<label>
+							Title:	
+						</label>
+						<input value='{{title}}' />
+
+						Mustache.template(template);
+
+						```
+					    </script>
+					</section>
+                    			<section data-markdown>
+					    <script type="text/template">
+						```javascript
+						<label>
+							Title:	
+						</label>
+						<input value='<%= title %>' />
+
+						_.template(template);
+
+						```
+					    </script>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -434,16 +460,40 @@ var BooksCollection = Backbone.Collection.extend({
 							```
 					    </script>
 					</section>
-                    <section data-markdown>
+                    			<section data-markdown>
 					    <script type="text/template">
-                            <h2>Examples </h2>
+                            			<h2>Examples </h2>
 					    </script>
 					</section>
 				</section>
 				<section>
-					<h2>ListView</h2>
-					Kittel
+					<section>
+						<h2>ListView</h2>
+						Kittel
+					</section>
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							var BookListView = Backbone.View.extend({
+							    tagName: 'ul',
+							    className: 'list',
+							    initialize: function() {
+								this.render();
+							    },
+							    render: function() {
+								that = this;
+								this.$el.empty();
+								this.collection.each(function(model) {
+								    that.$el.append(new BookView({model: model}));
+								});
+								return this;
+							    }
+							});
+							```
+					    </script>
+					</section>
 				</section>
+
 				<section>
 					<section>
 						<h2>Oppgave 2</h2>
@@ -458,9 +508,40 @@ var BooksCollection = Backbone.Collection.extend({
 					</section>
 				</section>
 				<section>
-					<h2>Router</h2>
-					Kittel
-				</section>
+					<section>
+						<h2>Router</h2>
+						Kittel
+					</section>
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							var BookRouter = Backbone.Router.extend({
+							  routes: {
+							    "help":                 "help",    // #help
+							    "search/:query":        "search",  // #search/kiwis
+							    "search/:query/p:page": "search"   // #search/kiwis/p7
+							  },
+							  help: function() {
+							    ...
+							  },
+							  search: function(query, page) {
+							    ...
+							  }
+							});
+							```
+					    </script>
+					</section>
+					<section data-markdown>
+					    <script type="text/template">
+							```javascript
+							var router = new BookRouter();
+
+							Backbone.history.start();
+							```
+					    </script>
+					</section>
+
+				</section>	
 				<section>
 					<section>
 						<h2>Oppgave 3</h2>
@@ -495,9 +576,15 @@ var BooksCollection = Backbone.Collection.extend({
 						</ul>
 					</section>
 					<section>
-						KITTEL
-						<h2>References</h2>
-					</section>
+						<section>
+							KITTEL
+							<h2>References</h2>
+						</section>
+						<section>
+							http://backbonejs.org/
+							http://underscorejs.org/
+						</section>
+					</section>	
 
 				</section>
                 <section>
