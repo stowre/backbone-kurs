@@ -230,24 +230,23 @@
 					<section data-markdown>
 					    <script type="text/template">
 							```javascript
-							var BookView = Backbone.View.extend({
+var BookView = Backbone.View.extend({
+	events: {
+		// User events to listen to (i.e. click, blur etc.)
+	},
 
-							});
-							```
-					    </script>
-					</section>
-					<section data-markdown>
-					    <script type="text/template">
-							```javascript
-							var BookView = Backbone.View.extend({
-								initialize: function() {
-									console.log('View model: ' + this.model);
-								},
+	initialize: function() {
+		// Initialize view
+	},
 
-								render: function() {
-									this.$el.html('<p>My View</p>');
-								}							
-							});
+	render: function() {
+		// Generate HTML for view
+	}
+});
+
+BookView.$el
+BookView.template
+BookView.remove()						
 							```
 					    </script>
 					</section>
@@ -257,19 +256,19 @@
 							```javascript
 							var BookView = Backbone.View.extend({
 								events: {
-									"click": "updateModel"
+									"click": "deleteBook"
 								},
 
 								initialize: function() {
-									console.log('View model: ' + this.model);							  	
+									this.model.on('destroy', this.remove, this);
 								},
 
 								render: function() {
-									this.$el.html('<p>My View</p>');
-								},
+									this.$el.html('<p>' + this.model.get('title') + '</p>');
+								},	
 
 								updateModel: function(event) {
-									this.model.set('title', event.currentTarget.value);							  	
+									this.model.destroy();;							  	
 								}
 							});
 							```
@@ -300,26 +299,41 @@
                     			<section data-markdown>
 					    <script type="text/template">
 						```javascript
-						<label>
-							Title:	
-						</label>
-						<input value='{{title}}' />
+						Backbone.View.extend({
+							template: "<input value='{{title}}' />",
 
-						Mustache.template(template);
+							render: function() {
+								var html = Mustache.render(this.template, {title: "Fortuna"});
+								this.$el.html(html);
+							}
+						});
+
+						Backbone.View.extend({
+							template: _.template("<input value='<%= title %>' />"),
+
+							render: function() {
+								this.$el.html(this.template({title: "Fortuna"}));
+							}
+						});
 
 						```
 					    </script>
 					</section>
                     			<section data-markdown>
 					    <script type="text/template">
+						DOM based (for example Angular.js)
 						```javascript
-						<label>
-							Title:	
-						</label>
-						<input value='<%= title %>' />
-
-						_.template(template);
-
+<html ng-app>
+<!-- Body tag augmented with ngController directive  -->
+<body ng-controller="MyController">
+  <input ng-model="foo" value="bar">
+  <!-- Button tag with ng-click directive, and
+         string expression 'buttonText'
+         wrapped in "{{ }}" markup -->
+  <button ng-click="changeFoo()">{{buttonText}}</button>
+  <script src="angular.js">
+</body>
+</html>
 						```
 					    </script>
 					</section>
@@ -474,21 +488,22 @@ var BooksCollection = Backbone.Collection.extend({
 					<section data-markdown>
 					    <script type="text/template">
 							```javascript
-							var BookListView = Backbone.View.extend({
-							    tagName: 'ul',
-							    className: 'list',
-							    initialize: function() {
-								this.render();
-							    },
-							    render: function() {
-								that = this;
-								this.$el.empty();
-								this.collection.each(function(model) {
-								    that.$el.append(new BookView({model: model}));
-								});
-								return this;
-							    }
-							});
+var BookListView = Backbone.View.extend({
+	tagName: 'ul',
+	className: 'list',
+	initialize: function() {
+		this.collection.on('add destroy', this.render, this);
+		this.render();
+	},
+	render: function() {
+		that = this;
+		this.$el.empty();
+		this.collection.each(function(model) {
+			that.$el.append(new BookView({model: model}));
+		});
+		return this;
+	}
+});
 							```
 					    </script>
 					</section>
