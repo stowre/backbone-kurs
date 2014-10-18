@@ -3,7 +3,7 @@ var BookView = Backbone.View.extend({
     className: 'list-menu-item',
 
     events: {
-      'click': 'open'
+      'click': 'remove'
     },
 
     initialize: function() {

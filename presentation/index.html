@@ -256,7 +256,7 @@ BookView.remove()
 							```javascript
 							var BookView = Backbone.View.extend({
 								events: {
-									"click": "deleteBook"
+									"click": "removeBook"
 								},
 
 								initialize: function() {
@@ -267,7 +267,7 @@ BookView.remove()
 									this.$el.html('<p>' + this.model.get('title') + '</p>');
 								},	
 
-								updateModel: function(event) {
+								removeBook: function(event) {
 									this.model.destroy();;							  	
 								}
 							});
@@ -321,7 +321,7 @@ BookView.remove()
 					</section>
                     			<section data-markdown>
 					    <script type="text/template">
-						DOM based (for example Angular.js)
+						DOM basert (for eksempel Angular.js)
 						```javascript
 <html ng-app>
 <!-- Body tag augmented with ngController directive  -->
@@ -590,15 +590,12 @@ var BookListView = Backbone.View.extend({
 							<li>Competition from angular.js</li>
 						</ul>
 					</section>
-					<section>
-						<section>
-							KITTEL
-							<h2>References</h2>
-						</section>
-						<section>
-							http://backbonejs.org/
-							http://underscorejs.org/
-						</section>
+					<section>						
+                        <h2>References</h2>
+                        <ul>
+                            <li>http://backbonejs.org/</li>
+                            <li>http://underscorejs.org/</li>
+                        </ul>
 					</section>	
 
 				</section>

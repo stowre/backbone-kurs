@@ -4,7 +4,7 @@ var BookListView = Backbone.View.extend({
     tagName: 'ul',
     className: 'list',
     initialize: function() {
-	this.render();
+
     },
     render: function() {
 	that = this;
