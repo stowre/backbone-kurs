@@ -1,11 +1,4 @@
-define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'views/NewsView'
-
-], function($, _, Backbone, NewsView){
-  var NewsListView = Backbone.View.extend({
+var NewsListView = Backbone.View.extend({
     tagName: 'ul',
 
     events: {
@@ -28,7 +21,4 @@ define([
 
       return this;
     } 
-  });
-
-  return NewsListView;
 });

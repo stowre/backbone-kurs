@@ -15,5 +15,15 @@
 
 <body>
 
+
+<script>
+  var BookModel = Backbone.Model.extend({
+    idAttribute: 'id',
+    urlRoot: function() {
+        return '/api/books';
+    },
+
+  });
+</script>
 </body>
 </html>

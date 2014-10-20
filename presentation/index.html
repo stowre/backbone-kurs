@@ -53,6 +53,16 @@
 
 				<section>
 					<h2>Agenda</h2>
+                        <ol>
+                            <li>Intro</li>
+							<li>Model, View, Templating</li>
+							<li>Oppgave 1</li>
+							<li>Collection, ListView</li>
+                            <li>Oppgave 2</li>
+                            <li>Router</li>
+                            <li>Oppgave 3</li>
+                            <li>Oppsummering</li>
+						</ol>
 				</section>
 
 				<!-- Example of nested vertical slides -->
@@ -87,18 +97,8 @@
 					<section>
 						<img src="img/MV.png">
 					</section>
-					<section>
-						<h2>Oppbygning</h2>
-						Avvent
-					</section>
-					<section>
-						<h2>Plugins</h2>
-						Arne
-					</section>
-					<section>
-						<h2>Backbone vs</h2>
-						<img src="img/size.png">
-					</section>
+
+
 
 				</section>
 
@@ -136,7 +136,9 @@
 							```javascript
 							  var BookModel = Backbone.Model.extend({
 
-							  	url: "http://www.backbone.org/model/"
+							  	idAttribute: "ISBN",
+                                
+							  	url: "/api/books",
 
 							  	initialize: function() {
 							  		console.log("called when initializing");
@@ -144,18 +146,38 @@
 
 							  	defaults: {
 							  		"rating": 4.5
-							  	},
-
-
-
+							  	}
+                                
 							  });
 							```
 					    </script>
 					</section>
+                    <section data-markdown>
+					    <script type="text/template">
+							```javascript
+							  var BookModel = Backbone.Model.extend({
+
+							  	idAttribute: "ISBN",
+                                
+							  	urlRoot: function() { return "/api/books"; },
+
+							  	initialize: function() {
+							  		console.log("called when initializing");
+							  	}, 
+
+							  	defaults: {
+							  		"rating": 4.5
+							  	}
+                                
+							  });
+							```
+					    </script>
+					</section>
+                    
 					<section data-markdown>
 					    <script type="text/template">
 							```javascript
-							  var book1 = new BookModel();
+							  var book1 = new BookModel(); // -> "called when initializing"
 
 							  var book2 = new BookModel({
 							  	"rating" : 6.0,
@@ -186,15 +208,13 @@
 					<section data-markdown>
 					    <script type="text/template">
 							```javascript
-							  // HTTP PUT
+							  // HTTP PUT / POST
 							  book1.save();
 
 							  // HTTP DELETE
 							  book2.destroy();
 
 							  // HTTP GET
-							  var book3 = new BookModel();
-							  book3.url = "http//www.cap.com/api/books/3";
 							  book3.fetch();
 
 
@@ -474,10 +494,8 @@ var BooksCollection = Backbone.Collection.extend({
 							```
 					    </script>
 					</section>
-                    			<section data-markdown>
-					    <script type="text/template">
+                    			<section>
                             			<h2>Examples </h2>
-					    </script>
 					</section>
 				</section>
 				<section>
@@ -572,6 +590,15 @@ var BookListView = Backbone.View.extend({
 				<section>
 					<section>
 						<h2>Oppsummering</h2>
+					</section>
+                    <section>
+						<h2>Plugins</h2>
+						Arne
+					</section>
+                    
+                    <section>
+						<h2>Backbone vs</h2>
+						<img src="img/size.png">
 					</section>
 					<section>
 						<h2>The Good Parts</h2>

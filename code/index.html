@@ -8,8 +8,17 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/cap.css" rel="stylesheet">
     <link rel="shortcut icon" href="http://www.no.capgemini.com/sites/all/themes/capgemini/favicon.ico" type="image/vnd.microsoft.icon">
-    <script data-main="js/main" src="templates/templates.js"></script>
-    <script src="lib/require.js"></script>
+    
+
+    
+    <!--    Dependencies -->
+    <script src="lib/jquery-2.1.1.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/bootstrap.js"></script>
+    <script src="lib/backbone.js"></script>
+    
+
+
 </head>
 
 <body>
@@ -37,7 +46,7 @@
 
 <div class="container">
 
-      <div class="row row-offcanvas row-offcanvas-right">
+    <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-xs-12 col-sm-9">
           <div class="row">
             <h2>Latest news </h2>
@@ -48,12 +57,11 @@
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <div id="addNewsView"></div>
 
-      </div><!--/row-->
-
-      <hr>
-
+        </div><!--/row-->
     </div>
 
+    
+    <!--    For simplicity, templates are inserted here -->    
     <script type="text/template" id="AddNewsTemplate">
       <div class="jumbotron">
       <h2>Legg til nyhet </h2>
@@ -63,12 +71,12 @@
             <input type="text" id="author" class="form-control" placeholder="Ditt navn">
           </div>
           <div class="form-group">
-            <label for="headline">Overskrift</label>
-            <input type="text" id="headline" class="form-control" placeholder="Awsm overskrift">
+            <label for="title">Overskrift</label>
+            <input type="text" id="title" class="form-control" placeholder="Awsm overskrift">
           </div>
           <div class="form-group">
             <label for="newsContent">Innhold</label>
-            <textarea id="newsContent"class="form-control" rows="3"></textarea>
+            <textarea id="newsContent" class="form-control" rows="3"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -77,12 +85,37 @@
 
     <script type="text/template" id="NewsItemTemplate">
       <div class="col-6 col-sm-6 col-lg-4">
-        <h2><%- heading %></h2>
+        <h2><%- title %></h2>
         <div>av <%- author %></div>
         <p> <%- content %></p>
       </div>
     </script>
+    
 
-    <sci
+    <script src="js/models/NewsModel.js"></script>
+    <script src="js/collections/NewsCollection.js"></script>
+    <script src="js/views/AddNewsView.js"></script>
+    <script src="js/views/NewsView.js"></script>
+    <script src="js/views/NewsListView.js"></script>
+    
+    <script type="text/javascript">
+          var newsCollection = new NewsCollection();
+
+          this.newsListView = new NewsListView({
+            el: '#newsListView',
+            collection: newsCollection
+          });
+          this.newsListView.render();
+
+          this.addNewsView = new AddNewsView({
+            el: $('#addNewsView'),
+            collection: newsCollection
+          });
+          this.addNewsView.render();
+            
+    </script>
+
+
+
 </body>
 </html>

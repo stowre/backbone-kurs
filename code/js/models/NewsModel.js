@@ -1,19 +1,11 @@
-define([
-  'underscore',
-  'backbone'
-], function(_, Backbone){
-  var NewsModel = Backbone.Model.extend({
-  	url: "http://localhost/model",
+var NewsModel = Backbone.Model.extend({
+    url: "http://localhost/model",
 
-  	defaults: {
+    validate: function(attrs, options) {
+        if (!attrs.title) {
+          return "Empty title not allowed";
+        }
+    }
 
-  	},
-
-  	initialize: function() {
-
-  	}
-
-  });
-  // Return the model for the module
-  return NewsModel;
 });
+

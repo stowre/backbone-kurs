@@ -1,15 +1,8 @@
-define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'text!../templates/NewsItem.html'
-
-], function($, _, Backbone, template){
 var NewsView = Backbone.View.extend({
     tagName: 'li',
     className: 'list-menu-item',
 
-    template: _.template(template),
+    template: _.template($('#NewsItemTemplate').html()),
 
     events: {
       'click': 'open'
@@ -28,7 +21,4 @@ var NewsView = Backbone.View.extend({
       return this;
     },
 
-  });
-
-  return NewsView;
 });
