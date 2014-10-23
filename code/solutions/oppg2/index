@@ -1,0 +1,19 @@
+    <script src="solutions/oppg2/NewsModel.js"></script>
+    <script src="solutions/oppg2/NewsCollection.js"></script>
+    <script src="solutions/oppg2/AddNewsView.js"></script>
+    <script src="solutions/oppg2/NewsView.js"></script>
+    <script src="solutions/oppg2/NewsListView.js"></script>
+    
+    <script type="text/javascript">
+        var newsCollection = new NewsCollection();
+        
+        var addNewsView = new AddNewsView({
+            el: $('#addNewsView'),
+            collection: newsCollection
+        });
+        
+        var newsListView = new NewsListView({
+            el: $('#newsListView'),
+            collection: newsCollection
+        });
+    </script>

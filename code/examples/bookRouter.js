@@ -3,9 +3,9 @@ var BookRouter = Backbone.Router.extend({
       
   },
   routes: {
-    "search/:title":        "search",  // #search/kiwis
+    "show/:title":        "show",  // 
   },
-  search: function(query) {
+  show: function(query) {
     var bookModel = new BookModel({
         title: query
     });

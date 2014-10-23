@@ -34,7 +34,6 @@ body {
 }
 
 
-
 #form-signin h2 {
 	color: #FFF;
 }
@@ -47,4 +46,34 @@ body {
 
 #newsListView {
 	list-style-type: none;
+}
+
+.newsItem {
+    background: white;
+    border-radius: 5px;
+}
+
+.newsItem span {
+    font-size: 16px;
+    color: #465a63;
+}
+
+.newsItem p {
+    font-size: 20px;
+    color: #465a63;
+}
+
+.list-menu-item {
+    float: left;
+    margin: 10px;
+}
+
+.list-menu-item article {
+    width: 100%;
+    padding: 10px;
+}
+
+.list-menu-item .headline {
+    margin-bottom: 5px;
+    margin-top: 5px;
 }

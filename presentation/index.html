@@ -70,22 +70,27 @@
 					<section>
 						<h2>Intro til Backbone.js</h2>
 						<ul>
-							<li>Created by Jeremy Ashkenas (CoffeeScript / Underscore.js </li>
-							<li>Initially released in October 2010</li>
-							<li>Current stable version 1.1.2</li>
-							<li>Dependencies to jQuery and Underscore</li>
+							<li>Jeremy Ashkenas (CoffeeScript / Underscore.js)</li>
+							<li>Lansert 2010</li>
+							<li>Stable version 1.1.2</li>
+							<li>Dependencies til jQuery og Underscore</li>
 						</ul>
 					</section>
 					<section>
 						<img src="img/websites.png">
 					</section>
+                    <section>
+						<h3>Javascript-rammeverk..</h3>
+                        <h1>WHY?</h1>
+					</section>
 					<section>
-						<h2>Why</h2>
 						<ul>
 							<li>Struktur </li>
 							<li>Single Responsiblity Principe</li>
                             <li>Vedlikeholdbar</li>
                             <li>Gjenbrukbar</li>
+                            <li>Hipt og kult med JS-rammeverk..</li>
+                            <li>++</li>
 						</ul>
 					</section>
 					<section>
@@ -108,11 +113,14 @@
 					<h2>Model</h2>
 					</section>
 					<section data-markdown>
+
 					    <script type="text/template">
 							```javascript
-							  var BookModel = Backbone.Model.extend({
-							  
-							  });
+var BookModel = Backbone.Model.extend({
+
+});
+
+var book = new BookModel();
 							```
 					    </script>
 					</section>
@@ -120,56 +128,44 @@
 					<section data-markdown>
 					    <script type="text/template">
 							```javascript
-							  var BookModel = Backbone.Model.extend({
+var BookModel = Backbone.Model.extend({
 
-							  	initialize: function() {
-							  		console.log("called when initializing");
-							  	} 
+    initialize: function() {
+        console.log("Hello");
+    },
+    
+    setAuthor: function(author) {
+        this.set("author", author);
+    }
 
-							  });
+});
+
+var book = new BookModel(); // => "Hello"
 							```
 					    </script>
 					</section>
 
-					<section data-markdown>
-					    <script type="text/template">
-							```javascript
-							  var BookModel = Backbone.Model.extend({
 
-							  	idAttribute: "ISBN",
-                                
-							  	url: "/api/books",
-
-							  	initialize: function() {
-							  		console.log("called when initializing");
-							  	}, 
-
-							  	defaults: {
-							  		"rating": 4.5
-							  	}
-                                
-							  });
-							```
-					    </script>
-					</section>
                     <section data-markdown>
 					    <script type="text/template">
 							```javascript
-							  var BookModel = Backbone.Model.extend({
+var BookModel = Backbone.Model.extend({
 
-							  	idAttribute: "ISBN",
-                                
-							  	urlRoot: function() { return "/api/books"; },
+    idAttribute: "ISBN",
 
-							  	initialize: function() {
-							  		console.log("called when initializing");
-							  	}, 
+    urlRoot: function() { return "/api/books"; },
 
-							  	defaults: {
-							  		"rating": 4.5
-							  	}
-                                
-							  });
+    initialize: function() {
+        console.log("Hello, my CID is " + this.cid);
+        console.log("and my ID is " +  this.id);
+         
+    }, 
+
+    defaults: {
+        "rating": 4.5
+    }
+
+});
 							```
 					    </script>
 					</section>
@@ -177,13 +173,13 @@
 					<section data-markdown>
 					    <script type="text/template">
 							```javascript
-							  var book1 = new BookModel(); // -> "called when initializing"
+var book1 = new BookModel(); // -> "called when initializing"
 
-							  var book2 = new BookModel({
-							  	"rating" : 6.0,
-							  	"author" : "Knausgård",
-							  	"title"  : "Mein Kampf"
-							  });
+var book2 = new BookModel({
+    "rating" : 6.0,
+    "author" : "Knausgård",
+    "title"  : "Mein Kampf"
+});
 							```
 					    </script>
 					</section>
@@ -191,14 +187,13 @@
 					<section data-markdown>
 					    <script type="text/template">
 							```javascript
-							  //  Get / Set attributes
-  							  book2.get("rating") // 6.0
-							  book2.get("author") // "Knausgård"
-							  book2.get("title") // "Mein Kampf"
+book2.get("rating") // 6.0
+book2.get("author") // "Knausgård"
+book2.get("title") // "Mein Kampf"
 
-							  book1.set("rating", 8.5);
-							  book1.set("author", "Roald Dahl");
-							  book1.set("title", "Gummitarzan");
+book1.set("rating", 8.5);
+book1.set("author", "Roald Dahl");
+book1.set("title", "Gummitarzan");
 
 
 							```
@@ -208,39 +203,24 @@
 					<section data-markdown>
 					    <script type="text/template">
 							```javascript
-							  // HTTP PUT / POST
-							  book1.save();
+// HTTP POST / PUT
+book1.save();
 
-							  // HTTP DELETE
-							  book2.destroy();
+// HTTP DELETE
+book2.destroy();
 
-							  // HTTP GET
-							  book3.fetch();
-
+// HTTP GET
+book3.fetch();
 
 							```
 					    </script>
 					</section>
 
 					<section data-markdown>
-						<h2>Example</h2>	
+						<h2>Examples</h2>	
 					 					
 					 </section>
 
-					<section data-markdown>
-					    <script type="text/template">
-							```javascript
-							  // Utility functions
-							  
-							  // Returns true if attributes were changed after initialization
-							  book1.hasChanged();
-
-							  // Returns the state of attributes before last change
-							  book1.previousAttributes();
-
-							```
-					    </script>
-					</section>
 				</section>
 
 				<section>
@@ -279,7 +259,8 @@ BookView.remove()
 									"click": "removeBook"
 								},
 
-								initialize: function() {
+								initialize: function(options) {
+                                    this.bgcolor = options.bgcolor;
 									this.model.on('destroy', this.remove, this);
 								},
 
@@ -335,6 +316,16 @@ BookView.remove()
 								this.$el.html(this.template({title: "Fortuna"}));
 							}
 						});
+                        
+Backbone.View.extend({
+    template: _.template($('#AddNewsTemplate').html()),
+
+    render: function() {
+        this.$el.html(this.template({title: "Fortuna"}));
+    }
+});
+                        
+                        
 
 						```
 					    </script>
@@ -362,11 +353,9 @@ BookView.remove()
 					<section>
 						<h2>Oppgave 1</h2>
 						<ol>
-							<li>Lag et nytt view <i>AddNewsView.js</i></li>
-							<li>Bruk template <i>window.addNewsTemplate</i></li>	
+							<li>Lag et nytt view <i>AddNewsView.js</i> (bruk template <i>addNewsTemplate</i> eller lag egen)</li>
 							<li>Lag ny modell NewsModel</li>
-							<li>Lag ny instans av NewsModel i AddNewsView</li>
-							<li>Lag kode for å oppdatere modell med verdier når bruker klikker Submit</li>
+							<li>Lag kode slik at modellen er oppdatert når/etter at bruker klikker Submit</li>
 						</ol>
 					</section>
 				</section>
@@ -375,67 +364,41 @@ BookView.remove()
                         <h2>Collection</h2>
                         <ul>
                             <li>Ordered set of models</li>
-                            <li>Views can bind to events ("change", "add", "remove") </li>
-                            <li>Underscore methods (_.each, _.map, _.reduce)</li>
+                            <li>Views lytter til events (f.eks "change", "add", "remove") </li>
+                            <li>Underscore methoder innbakt (_.each, _.map, _.reduce)</li>
                         </ul>
                     </section>					
                     <section data-markdown>
 					    <script type="text/template">
 							```javascript
 var BooksCollection = Backbone.Collection.extend({
-    // Defining model is required
-    model: BookModel							
+    model: BookModel,
+    url: "/api/books"
 });
-							```
-					    </script>
-					</section>
-                    <section data-markdown>
-					    <script type="text/template">
-                            ```javascript
-                            // Create model
-                            var book1 = new BookModel();
-                            book1.set(id, 1337);
-                            book1.set("author", "Jo Nesbø");
-                            
-                            // Create collection
-                            var books = new BookCollection();
-                            
-                            // Add model to collection
-                            // Triggers "add" event
-                            books.add(book1);
-                        
-                            
-                            // Get model from collection by models idAttribute
-                            var model = books.get(1337);
-                            
-                            // Raw Javascript array of all models
-                            books.models
-                            
 
+var books = new BooksCollection();
+books.add(new Book());
+							```
+					    </script>
+					</section>
+                    <section data-markdown>
+					    <script type="text/template">
+                            ```javascript
+var book = new BookModel({
+    id: 1337,
+    author: "Jo Nesbø"
+});
 
-							```
-					    </script>
-					</section>
-                    <section data-markdown>
-					    <script type="text/template">
-                            ```javascript
-                            var books2 = new BookCollection();
-                            
-                            // HTTP GET to url
-                            // Triggers "reset" event on success
-                            books2.fetch();
-                            
-                            // HTTP GET with options
-                            books2.fetch({
-                                success: function(){ console.log("sucess!"); },
-                                error: function(coll, res){ console.log(res.status); }
-                            })
-                            
-                            // Add model to collection + persistence
-                            // Triggers "add" event
-                            // HTTP PUT to books.url/book1.id (/books/1337)
-                            books.create(book1);
-                            
+var books = new BookCollection();
+
+books.add(book); // Triggers "add" event
+
+var awsm = books.get(1337);
+var first = books.first();
+var last = books.last();
+
+// Raw Javascript array of all models
+books.models
                             
 							```
 					    </script>
@@ -443,21 +406,40 @@ var BooksCollection = Backbone.Collection.extend({
                     <section data-markdown>
 					    <script type="text/template">
                             ```javascript
-                                                        
-                            // Pluck an attribute from each model in the collection.
-                            books2.pluck("author"); // -> ["Dustin Thomason", "Dan Brown"]
+// HTTP GET to url
+// Triggers "reset" event on success
+books.fetch();
+
+// HTTP GET with options
+books.fetch({
+    success: function(){ console.log("success!"); },
+    error: function(coll, res){ console.log(res.status); }
+})
+
+// Add model to collection + persistence
+// Triggers "add" event
+// HTTP PUT to books.url/book.id (/books/1337)
+books.create(book);
                             
-                            // Return an array of all the models in a 
-                            // collection that match the passed attributes
-                            var publishedIn2003 = books2.where({published: 2003});
                             
-                            // Forces resort
-                            // Triggers "sort" event
-                            books2.sort();
-                            
-                            books2.length;
-                            
-                            
+							```
+					    </script>
+					</section>
+                    <section data-markdown>
+					    <script type="text/template">
+                            ```javascript                                                       
+// Pluck an attribute from each model in the collection.
+books2.pluck("author"); // -> ["Dustin Thomason", "Dan Brown"]
+
+// Return an array of all the models in a 
+// collection that match the passed attributes
+var publishedIn2003 = books2.where({published: 2003});
+
+// Forces resort
+// Triggers "sort" event
+books2.sort();
+
+books2.length;                        
 							```
 					    </script>
 					</section>
@@ -582,8 +564,8 @@ var BookListView = Backbone.View.extend({
 							<li>Lag  <i>router.js</i></li>
 							<li>Legg til route for <i>/articles/:id</i></li>
 							<li>Plukk opp riktig model fra collection basert på id</li>
-							<li>Lag view ArticleView med ArticleTemplate</li>
-							<li>Render ArticleView i $('#left-content')</li>
+							<li>Lag view ArticleView med deres egen template</li>
+							<li>Render ArticleView i en egen tag på siden</li>
 						</ol>
 					</section>
 				</section>
@@ -592,29 +574,23 @@ var BookListView = Backbone.View.extend({
 						<h2>Oppsummering</h2>
 					</section>
                     <section>
-						<h2>Plugins</h2>
-						Arne
+						<img src="img/plugins.png">
 					</section>
                     
-                    <section>
-						<h2>Backbone vs</h2>
-						<img src="img/size.png">
-					</section>
 					<section>
 						<h2>The Good Parts</h2>
 						<ul>
-							<li>Size</li>
-							<li>Learning curve</li>
-							<li>Flexible</li>
-							<li>Community</li>
-							<li>Ecosystem</li>
+							<li>Størrelse</li>
+							<li>Læringskurve</li>
+							<li>Fleksibelt</li>
+							<li>Stort community</li>
 						</ul>
 					</section>
 					<section>	
 						<h2>Not so good Parts</h2>
 						<ul>
-                            <li>Lacks two-way binding</li>
-							<li>Competition from angular.js</li>
+                            <li>Boilerplate</li>
+							<li>Standarden har blitt angular.js</li>
 						</ul>
 					</section>
 					<section>						

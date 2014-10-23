@@ -1,0 +1,9 @@
+    <script src="solutions/oppg1/NewsModel.js"></script>
+    <script src="solutions/oppg1/AddNewsView.js"></script>
+    
+    <script type="text/javascript">
+        var addNewsView = new AddNewsView({
+            el: $('#addNewsView')
+        });
+        
+    </script>

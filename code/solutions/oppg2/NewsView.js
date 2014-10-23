@@ -16,9 +16,9 @@ var NewsView = Backbone.View.extend({
     render: function() {
       var $el = $(this.el);
       $el.data('listId', this.model.get('id'));
-      var html = this.template(this.model.toJSON());
+      var html = this.template({model: this.model.toJSON()});
       $el.html(html);
       return this;
-    },
+    }
 
 });
